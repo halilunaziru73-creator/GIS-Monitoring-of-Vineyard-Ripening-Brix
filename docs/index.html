@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIS Monitoring of Vineyard Ripening (Brix) | Naziru Halilu</title>
+<meta name="description" content="R² = 0.9784, harvest forecast 13 September (Julian day 256). Research overview by Naziru Halilu.">
+<meta property="og:title" content="GIS Monitoring of Vineyard Ripening (Brix)">
+<meta property="og:description" content="R² = 0.9784, harvest forecast 13 September (Julian day 256)">
+<link rel="icon" type="image/png" href="avatar.png">
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --border: #e2e0d8; --text: #1a1a18;
+    --text-secondary: #6b6a63; --accent-bg: #eaf1fb; --accent-text: #185fa5; --accent-border: #85b7eb;
+    --particle: #378ADD; --node: #b4b2a9;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:3rem 1.5rem; background:var(--bg); color:var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 760px; margin: 0 auto; }
+  .site-header { display:flex; align-items:center; gap:12px; margin-bottom:1.75rem; padding-bottom:1.5rem;
+    border-bottom: 1px solid var(--border); }
+  .site-header img { width:44px; height:44px; border-radius:50%; object-fit:cover; border:1px solid var(--border); }
+  .site-header-name { font-size:14.5px; font-weight:600; margin:0; }
+  .site-header-role { font-size:12.5px; color:var(--text-secondary); margin:2px 0 0; }
+  .site-header-links { margin-left:auto; display:flex; gap:14px; }
+  .site-header-links a { font-size:12.5px; color:var(--accent-text); text-decoration:none; }
+  h1 { font-size: 21px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .metric { font-size: 14px; color: var(--text-secondary); margin: 0 0 1.75rem; }
+  .solve-card { background: var(--accent-bg); border: 1px solid var(--accent-border); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+  .solve-row { display:flex; gap:12px; margin-bottom:10px; align-items:flex-start; }
+  .solve-row:last-child { margin-bottom:0; }
+  .solve-tag { font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--accent-text);
+    width:78px; flex-shrink:0; padding-top:1px; }
+  .solve-text { font-size:14px; line-height:1.55; color:var(--text); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; }
+  .sim-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: .04em; margin: 0 0 8px; font-weight: 600; }
+  svg#sim { width: 100%; height: auto; margin-bottom: 1.25rem; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1.25rem; }
+  .chip { font-size:12.5px; padding:7px 12px; border-radius:999px; border:1px solid var(--border);
+    background:var(--bg); cursor:pointer; transition:.25s; color:var(--text); }
+  .chip.active { background:var(--accent-bg); color:var(--accent-text); border-color:var(--accent-border); }
+  .chat-row { display:flex; gap:10px; align-items:flex-start; }
+  .avatar { width:36px; height:36px; border-radius:50%; flex-shrink:0; object-fit:cover; border:1px solid var(--border); }
+  .bubble-col { flex:1; min-width:0; }
+  .bubble-name { font-size:12px; color:var(--text-secondary); margin:0 0 4px; }
+  .bubble { background:var(--bg); border-radius:12px; border-top-left-radius:4px; padding:0.85rem 1rem;
+    min-height:52px; display:flex; align-items:center; font-size:14.5px; line-height:1.6; }
+  .step-figure { width:100%; border-radius:10px; border:1px solid var(--border); margin:12px 0 4px; display:block; }
+  .step-figure-cap { font-size:11.5px; color:var(--text-secondary); margin:0 0 12px; }
+  .ask-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-top:1.25rem; }
+  .ask-title { font-size:15px; font-weight:600; margin:0 0 4px; }
+  .ask-sub { font-size:13px; color:var(--text-secondary); margin:0 0 1rem; }
+  .ask-field { width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border);
+    background:var(--bg); color:var(--text); font-size:14px; font-family:inherit; margin-bottom:10px; }
+  textarea.ask-field { min-height:90px; resize:vertical; }
+  .ask-btn { background:var(--accent-text); color:#fff; border:none; border-radius:8px; padding:10px 18px;
+    font-size:14px; font-weight:500; cursor:pointer; }
+  .ask-status { font-size:13px; margin-top:10px; display:none; }
+  .ask-status.ok { color:#1d9e75; display:block; }
+  .ask-status.err { color:#e24b4a; display:block; }
+  .site-footer { margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--border); }
+  .back { display:inline-block; font-size:13px; color:var(--accent-text); text-decoration:none; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#171715; --card:#201f1c; --border:#37362f; --text:#eceae2; --text-secondary:#9c9a92;
+      --accent-bg:#0c447c; --accent-text:#b5d4f4; --accent-border:#185fa5; --particle:#85b7eb; --node:#5f5e5a; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="site-header">
+    <img src="avatar.png" alt="Naziru Halilu">
+    <div>
+      <p class="site-header-name">Naziru Halilu</p>
+      <p class="site-header-role">AgEngineering &middot; Computer Vision &middot; Spatial Data &amp; GIS</p>
+    </div>
+    <div class="site-header-links">
+      <a href="https://github.com/halilunaziru73-creator">GitHub profile</a>
+      <a href="https://github.com/halilunaziru73-creator/GIS-Monitoring-of-Vineyard-Ripening-Brix">Repository</a>
+    </div>
+  </div>
+  <h1>GIS Monitoring of Vineyard Ripening (Brix)</h1>
+  <p class="metric">R² = 0.9784, harvest forecast 13 September (Julian day 256)</p>
+  <div class="solve-card">
+    <div class="solve-row"><span class="solve-tag">Problem</span><span class="solve-text">Deciding when to harvest is one of the most consequential decisions in viticulture, picking too early loses sugar accumulation, picking too late risks over-ripening, but isolated field observations alone give no predictive lead time.</span></div>
+    <div class="solve-row"><span class="solve-tag">Solution</span><span class="solve-text">Grape must samples collected across five dates and fit to a logarithmic regression against Julian day, combined with NDVI spectral analysis and Thiessen-interpolated spatial ripening maps.</span></div>
+    <div class="solve-row"><span class="solve-tag">Impact</span><span class="solve-text">A regression model (R-squared = 0.9784) forecasting harvest maturity (25.5-27 degrees Bx) on 13 September, giving vineyard managers real predictive lead time for labour and winery logistics.</span></div>
+  </div>
+  <div class="card">
+    <p class="sim-label">Process simulation</p>
+    <svg id="sim" viewBox="0 0 680 100" role="img" aria-label="Animated process simulation">
+      <line x1="40" y1="55" x2="640" y2="55" stroke="var(--node)" stroke-width="1"/>
+      <g id="nodes"></g>
+      <circle id="particle" cx="40" cy="55" r="8" fill="var(--particle)"/>
+    </svg>
+    <div class="chips" id="chips"></div>
+    <div class="chat-row">
+      <img class="avatar" src="avatar.png" alt="Naziru Halilu">
+      <div class="bubble-col">
+        <p class="bubble-name">Naziru explains this step</p>
+        <div class="bubble" id="detail"></div>
+        <img class="step-figure" id="step-figure" src="" alt="">
+        <p class="step-figure-cap" id="step-figure-cap"></p>
+      </div>
+    </div>
+  </div>
+  <div class="ask-card">
+    <p class="ask-title">Ask a question about this work</p>
+    <p class="ask-sub">Send Naziru a question directly, it's delivered straight to his inbox.</p>
+    <input class="ask-field" id="ask-name" type="text" placeholder="Your name">
+    <input class="ask-field" id="ask-email" type="email" placeholder="Your email (so Naziru can reply)">
+    <textarea class="ask-field" id="ask-question" placeholder="What would you like to ask about this project?"></textarea>
+    <button class="ask-btn" id="ask-btn" onclick="sendQuestion()">Send question</button>
+    <p class="ask-status" id="ask-status"></p>
+  </div>
+  <div class="site-footer">
+    <a class="back" href="https://github.com/halilunaziru73-creator/GIS-Monitoring-of-Vineyard-Ripening-Brix">&larr; Back to GitHub repository</a>
+  </div>
+</div>
+<script>
+const steps = [
+  {"t": "Land use and occupation mapping", "img": "figures/04_land_use_and_occupation.png",
+   "d": "The property was classified into agricultural, human-infrastructure, forestry, and water-cover parcels, giving spatial context for interpreting NDVI and Brix variation across the vineyard."},
+  {"t": "Spectral band analysis (NDVI)", "img": "figures/05_ndvi_raster.png",
+   "d": "Red and NIR bands were extracted and combined into NDVI, both as a direct raster and as an orthomosaic-corrected surface, to characterise spatial vegetation vigour."},
+  {"t": "Field sampling (5 dates)", "img": "figures/09_brix_regression_analysis.png",
+   "d": "Grape must samples were collected with a refractometer across five dates through the ripening season, 15 and 30 July, and 6, 15, and 30 August, recording degrees Brix per sample point."},
+  {"t": "Logarithmic regression modelling", "img": "figures/09_brix_regression_analysis.png",
+   "d": "Average Brix was fit to a logarithmic regression against Julian day: y = 65.139 ln(x) - 335.44, achieving R-squared = 0.9784, forecasting 25.5-27 degrees Bx maturity around 13 September."},
+  {"t": "Spatial interpolation (Thiessen)", "img": "figures/12_thiessen_interpolation_15jul.png",
+   "d": "Thiessen tessellation converted point Brix samples into continuous ripening-zone maps for each sampling date, revealing how maturity varied spatially across the vineyard."},
+  {"t": "Reporting", "img": "figures/01_farm_location.png",
+   "d": "The regression model, harvest forecast, and spatial results were compiled into a full written report, translating the analysis into an operational harvest-planning tool."}
+];
+let idx = 0;
+let timer = null;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const svgNS = "http://www.w3.org/2000/svg";
+
+function nodeX(i, n) {
+  const left = 40, right = 640;
+  if (n === 1) return left;
+  return left + (right - left) * (i / (n - 1));
+}
+function renderNodes() {
+  const g = document.getElementById('nodes');
+  g.innerHTML = '';
+  steps.forEach((s, i) => {
+    const c = document.createElementNS(svgNS, 'circle');
+    c.setAttribute('cx', nodeX(i, steps.length));
+    c.setAttribute('cy', 55);
+    c.setAttribute('r', 5);
+    c.setAttribute('fill', 'var(--node)');
+    g.appendChild(c);
+  });
+}
+function render() {
+  const chipsEl = document.getElementById('chips');
+  chipsEl.innerHTML = '';
+  steps.forEach((s, i) => {
+    const c = document.createElement('button');
+    c.className = 'chip' + (i === idx ? ' active' : '');
+    c.textContent = (i+1) + '. ' + s.t;
+    c.onclick = () => { idx = i; render(); resetTimer(); };
+    chipsEl.appendChild(c);
+  });
+  document.getElementById('detail').textContent = 'Step ' + (idx + 1) + ': ' + steps[idx].t + '. ' + steps[idx].d;
+  document.getElementById('particle').setAttribute('cx', nodeX(idx, steps.length));
+  const fig = document.getElementById('step-figure');
+  const cap = document.getElementById('step-figure-cap');
+  fig.src = steps[idx].img;
+  fig.alt = steps[idx].t;
+  cap.textContent = 'Figure: ' + steps[idx].t;
+}
+function tick() { idx = (idx + 1) % steps.length; render(); }
+let simInView = true;
+function resetTimer() {
+  if (timer) clearInterval(timer);
+  if (!reduceMotion && simInView) timer = setInterval(tick, 2200);
+}
+renderNodes();
+render();
+resetTimer();
+const simObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    simInView = entry.isIntersecting;
+    if (simInView) { resetTimer(); } else if (timer) { clearInterval(timer); timer = null; }
+  });
+}, { threshold: 0.15 });
+simObserver.observe(document.getElementById('sim'));
+
+async function sendQuestion() {
+  const name = document.getElementById('ask-name').value.trim();
+  const email = document.getElementById('ask-email').value.trim();
+  const question = document.getElementById('ask-question').value.trim();
+  const status = document.getElementById('ask-status');
+  const btn = document.getElementById('ask-btn');
+  status.className = 'ask-status';
+  if (!question) { status.textContent = 'Please enter a question.'; status.className = 'ask-status err'; return; }
+  if (!email) { status.textContent = 'Please enter your email so Naziru can reply.'; status.className = 'ask-status err'; return; }
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'b58a03ec-1761-4115-8b5b-7bba5bc4b65a',
+        subject: 'Question about: GIS Monitoring of Vineyard Ripening (Brix)',
+        name: name || 'Anonymous',
+        email: email,
+        message: question
+      })
+    });
+    const result = await res.json();
+    if (result.success) {
+      status.textContent = 'Sent, Naziru will reply to your email.';
+      status.className = 'ask-status ok';
+      document.getElementById('ask-name').value = '';
+      document.getElementById('ask-email').value = '';
+      document.getElementById('ask-question').value = '';
+    } else {
+      status.textContent = 'Something went wrong. Please try again.';
+      status.className = 'ask-status err';
+    }
+  } catch (e) {
+    status.textContent = 'Network error. Please try again.';
+    status.className = 'ask-status err';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Send question';
+}
+</script>
+</body>
+</html>
