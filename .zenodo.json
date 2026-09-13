@@ -1,0 +1,9 @@
+{
+  "title": "GIS Monitoring of Vineyard Ripening (Brix) at Quinta de Nossa Senhora de Lurdes, Vila Real, Portugal",
+  "description": "GIS and NDVI-based monitoring of grape ripening (degrees Brix) at a 6-hectare vineyard: logarithmic regression harvest-date forecasting (R2 = 0.9784), spatial interpolation of sugar accumulation across five sampling dates, and land-use mapping.",
+  "creators": [{"name": "Halilu, Naziru", "orcid": "0009-0006-2324-9599"}],
+  "keywords": ["GIS", "precision viticulture", "NDVI", "Brix", "grape ripening", "harvest forecasting", "spatial interpolation", "Vila Real"],
+  "license": "MIT",
+  "upload_type": "dataset",
+  "access_right": "open"
+}
