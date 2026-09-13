@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: If you use this work, please cite it as below.
+type: dataset
+title: 'GIS Monitoring of Vineyard Ripening (Brix) at Quinta de Nossa Senhora de
+  Lurdes, Vila Real, Portugal'
+authors:
+- family-names: Halilu
+  given-names: Naziru
+  orcid: https://orcid.org/0009-0006-2324-9599
+repository-code: https://github.com/halilunaziru73-creator/GIS-Monitoring-of-Vineyard-Ripening-Brix
+license: MIT
+date-released: '2026-09-13'
+keywords:
+- GIS
+- precision viticulture
+- NDVI
+- Brix
+- harvest forecasting
