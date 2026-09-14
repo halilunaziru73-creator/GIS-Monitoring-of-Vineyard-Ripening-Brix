@@ -48,76 +48,76 @@ not redistributed in this repository.
 ## Featuring QGIS Outputs Results
 
 ![Farm location](figures/01_farm_location.png)
-*Figure 1. Location of Quinta de Nossa Senhora de Lurdes farm area (RGB).*
+**Figure 1.** *Location of Quinta de Nossa Senhora de Lurdes farm area (RGB).*
 
 ![Property boundary](figures/02_property_boundary.png)
-*Figure 2. Property boundary delineation.*
+**Figure 2.** *Property boundary delineation.*
 
 ![Boundary cartography](figures/03_boundary_cartography.png)
-*Figure 3. Cartographic layout of the property boundary.*
+**Figure 3.** *Cartographic layout of the property boundary.*
 
 ![Land use and occupation mapping](figures/04_land_use_and_occupation.png)
-*Figure 4. Land use and land occupation classification of the estate.*
+**Figure 4.** *Land use and land occupation classification of the estate.*
 
 ![NDVI raster](figures/05_ndvi_raster.png)
-*Figure 5. NDVI raster derived from Sentinel-2 imagery.*
+**Figure 5.** *NDVI raster derived from Sentinel-2 imagery.*
 
 ![Near-infrared band](figures/06_near_infrared_band.png)
-*Figure 6. Near-infrared (NIR) reflectance band.*
+**Figure 6.** *Near-infrared (NIR) reflectance band.*
 
 ![Red band](figures/07_red_band.png)
-*Figure 7. Red reflectance band.*
+**Figure 7.** *Red reflectance band.*
 
 ![Orthomosaic NDVI](figures/08_orthomosaic_ndvi.png)
-*Figure 8. Orthomosaic-corrected NDVI surface.*
+**Figure 8.** *Orthomosaic-corrected NDVI surface.*
 
 ![Brix regression analysis](figures/09_brix_regression_analysis.png)
-*Figure 9. Logarithmic regression of average Brix against Julian day (R-squared = 0.9784).*
+**Figure 9.** *Logarithmic regression of average Brix against Julian day (R-squared = 0.9784).*
 
 ![Brix sample points, 15 July](figures/10_brix_sample_points_15jul.png)
-*Figure 10. Georeferenced Brix sample points, 15 July.*
+**Figure 10.** *Georeferenced Brix sample points, 15 July.*
 
 ![Brix value map, 15 July](figures/11_brix_value_map_15jul.png)
-*Figure 11. Brix value map, 15 July.*
+**Figure 11.** *Brix value map, 15 July.*
 
 ![Thiessen interpolation, 15 July](figures/12_thiessen_interpolation_15jul.png)
-*Figure 12. Thiessen tessellation interpolation of Brix values, 15 July.*
+**Figure 12.** *Thiessen tessellation interpolation of Brix values, 15 July.*
 
 ![Brix sample points, 30 July](figures/13_brix_sample_points_30jul.png)
-*Figure 13. Georeferenced Brix sample points, 30 July.*
+**Figure 13.** *Georeferenced Brix sample points, 30 July.*
 
 ![Brix value map, 30 July](figures/14_brix_value_map_30jul.png)
-*Figure 14. Brix value map, 30 July.*
+**Figure 14.** *Brix value map, 30 July.*
 
 ![Thiessen interpolation, 30 July](figures/15_thiessen_interpolation_30jul.png)
-*Figure 15. Thiessen tessellation interpolation of Brix values, 30 July.*
+**Figure 15.** *Thiessen tessellation interpolation of Brix values, 30 July.*
 
 ![Brix sample points, 6 August](figures/16_brix_sample_points_06aug.png)
-*Figure 16. Georeferenced Brix sample points, 6 August.*
+**Figure 16.** *Georeferenced Brix sample points, 6 August.*
 
 ![Brix value map, 6 August](figures/17_brix_value_map_06aug.png)
-*Figure 17. Brix value map, 6 August.*
+**Figure 17.** *Brix value map, 6 August.*
 
 ![Thiessen interpolation, 6 August](figures/18_thiessen_interpolation_06aug.png)
-*Figure 18. Thiessen tessellation interpolation of Brix values, 6 August.*
+**Figure 18.** *Thiessen tessellation interpolation of Brix values, 6 August.*
 
 ![Brix sample points, 15 August](figures/19_brix_sample_points_15aug.png)
-*Figure 19. Georeferenced Brix sample points, 15 August.*
+**Figure 19.** *Georeferenced Brix sample points, 15 August.*
 
 ![Brix value map, 15 August](figures/20_brix_value_map_15aug.png)
-*Figure 20. Brix value map, 15 August.*
+**Figure 20.** *Brix value map, 15 August.*
 
 ![Thiessen interpolation, 15 August](figures/21_thiessen_interpolation_15aug.png)
-*Figure 21. Thiessen tessellation interpolation of Brix values, 15 August.*
+**Figure 21.** *Thiessen tessellation interpolation of Brix values, 15 August.*
 
 ![Brix sample points, 30 August](figures/22_brix_sample_points_30aug.png)
-*Figure 22. Georeferenced Brix sample points, 30 August.*
+**Figure 22.** *Georeferenced Brix sample points, 30 August.*
 
 ![Brix value map, 30 August](figures/23_brix_value_map_30aug.png)
-*Figure 23. Brix value map, 30 August.*
+**Figure 23.** *Brix value map, 30 August.*
 
 ![Thiessen interpolation, 30 August](figures/24_thiessen_interpolation_30aug.png)
-*Figure 24. Thiessen tessellation interpolation of Brix values, 30 August.*
+**Figure 24.** *Thiessen tessellation interpolation of Brix values, 30 August.*
 
 ## Repository Structure
 
