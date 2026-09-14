@@ -1,6 +1,8 @@
 ### Hi, this is a research repository by Naziru Halilu 👋
 
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE) ![QGIS](https://img.shields.io/badge/QGIS-3.x-green)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22741094.svg)](https://doi.org/10.5281/zenodo.22741094)
 
 **GIS Monitoring of Vineyard Ripening (Brix)**
 
