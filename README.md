@@ -71,8 +71,8 @@ not redistributed in this repository.
 ![Orthomosaic NDVI](figures/08_orthomosaic_ndvi.png)
 **Figure 8.** *Orthomosaic-corrected NDVI surface.*
 
-![Brix regression analysis](figures/09_brix_regression_analysis.png)
-**Figure 9.** *Logarithmic regression of average Brix against Julian day (R-squared = 0.9784).*
+![Thiessen interpolation of Brix values, 15 July](figures/12_thiessen_interpolation_15jul.png)
+**Figure 9.** *Thiessen tessellation interpolation of Brix values, 15 July, one of the five sampling dates used to fit the logarithmic regression (R-squared = 0.9784) reported in the Results above.*
 
 ![Brix sample points, 15 July](figures/10_brix_sample_points_15jul.png)
 **Figure 10.** *Georeferenced Brix sample points, 15 July.*
